@@ -63,13 +63,31 @@ router
 router
     .route('/addExerciseToRoutine')
     .post(async (req, res) => {
-
+        routineId = req.body.routineId
+        date = req.body.date
+        exerciseId = req.body.exerciseId
+        try {
+            await routinesData.addExerciseToRoutine(routineId, date, exerciseId);
+            res.status(200).json({ Message: "Exersise been added to routine" });
+        } catch (e) {
+            res.status(400).json({ error: e });
+            return;
+        }
     })
 
 router
     .route('/deleteExerciseFromRoutine')
     .post(async (req, res) => {
-
+        routineId = req.body.routineId
+        date = req.body.date
+        exerciseId = req.body.exerciseId
+        try {
+            await routinesData.deleteExerciseFromRoutine(routineId, date, exerciseId);
+            res.status(200).json({ Message: "Exersise been deleted to routine" });
+        } catch (e) {
+            res.status(400).json({ error: e });
+            return;
+        }
     })
 
 module.exports = router

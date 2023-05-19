@@ -46,22 +46,24 @@ const deleteRoutine = async (routineId) => {
 
 const addExerciseToRoutine = async (routineId, date, exerciseId) => {
     const routinesDataCollection = await routinesData();
-    const updateResult = await routinesDataCollection.updateOne(
-        { _id: routineId },
+    const objectId = new ObjectId(routineId);
+    const addResult = await routinesDataCollection.updateOne(
+        { _id: objectId },
         { $push: { [date]: exerciseId } }
     );
-    if (updateResult.modifiedCount === 0) throw 'Insert failed! (Routine)';
-    return { Message: "Exersise been added to routine" };
+    if (addResult.modifiedCount === 0) throw 'Exercise not found';
+    return { Message: "Exersise been added from routine" };
 };
 
 const deleteExerciseFromRoutine = async (routineId, date, exerciseId) => {
     const routinesDataCollection = await routinesData();
+    const objectId = new ObjectId(routineId);
     const deleteResult = await routinesDataCollection.updateOne(
-        { _id: routineId },
+        { _id: objectId },
         { $pull: { [date]: exerciseId } }
     );
-    if (deleteResult.modifiedCount === 0) throw 'Insert failed! (Routine)';
-    return { Message: "Exersise been added to routine" };
+    if (deleteResult.modifiedCount === 0) throw 'Exercise not found';
+    return { Message: "Exersise been deleted from routine" };
 };
 
 
