@@ -1,5 +1,5 @@
 const MongoClient = require('mongodb').MongoClient;
-const settings = require('./settings_local');
+const settings = require('./settings_local.json');
 const mongoConfig = settings.mongoConfig;
 
 let _connection = undefined;
