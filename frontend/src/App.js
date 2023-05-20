@@ -1,13 +1,19 @@
-import { useState } from 'react';
+import { BrowserRouter, Route, Routes, Redirect } from "react-router-dom";
 import Homepage from './pages/HomePage';
-import RoutinesPage from './pages/RoutinesPage'
+import RoutinesPage from './pages/RoutinesPage';
+import { AuthProvider } from './firebase/Auth';
+
 
 function App() {
   return (
-    <div className="App">
-      <Homepage />
-      <RoutinesPage />
-    </div>
+    <AuthProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path='/' element={<Homepage />} />
+          <Route path='/routine' element={<RoutinesPage />} />
+        </Routes>
+      </BrowserRouter>
+    </AuthProvider>
   );
 }
 

@@ -1,4 +1,4 @@
-import firebase from 'firebase.app'
+import firebase from 'firebase/compat/app';
 
 async function doCreateUserWithEmailAndPassword(email, password) {
     await firebase.auth().createUserWithEmailAndPassword(email, password);
@@ -24,6 +24,7 @@ async function doSocialSignIn(provider) {
     await firebase.auth().signInWithPopup(socialProcider);
 }
 
+
 // async function doPasswordReset(email) {
 //     await firebase.auth().sendPasswordReset(email);
 // }
@@ -31,6 +32,10 @@ async function doSocialSignIn(provider) {
 // async function doPasswordUpdate(email) {
 //     await firebase.auth().passwordUpdate(email);
 // }
+
+async function doSignOut() {
+    await firebase.auth().signOut();
+}
 
 
 export {
@@ -40,4 +45,5 @@ export {
     doSocialSignIn,
     // doPasswordReset,
     // doPasswordUpdate
+    doSignOut
 };
