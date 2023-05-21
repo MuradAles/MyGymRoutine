@@ -4,7 +4,7 @@ const validation = require('../validation');
 const bcrypt = require('bcryptjs');
 const saltRounds = 12;
 
-const createUser = async (email, password, uid) => {
+const createUser = async (uid, email, password) => {
     try {
         email = validation.validateEmail(email)
     } catch (e) {

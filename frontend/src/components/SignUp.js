@@ -5,8 +5,6 @@ import { AuthContext } from "../firebase/Auth";
 function SignUp() {
     const { currentUser } = useContext(AuthContext);
     const [pwMatch, setPwMatch] = useState('')
-
-    console.log(currentUser.uid)
     const handleSubmite = async (e) => {
         e.preventDefault();
         const { email_Intput, password_Intput, repeat_password_Intput } = e.target
@@ -15,10 +13,22 @@ function SignUp() {
             return false;
         }
         try {
-            await doCreateUserWithEmailAndPassword(
+            let userId = await doCreateUserWithEmailAndPassword(
                 email_Intput.value,
                 password_Intput.value,
-            );
+            )
+            console.log("userId", userId)
+            await fetch('/users/signup', {
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    uid: userId.uid,
+                    email: email_Intput.value,
+                    password: password_Intput.value
+                })
+            })
         } catch (error) {
             alert(error);
         }

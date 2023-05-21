@@ -37,9 +37,9 @@ router
 router
     .route('/signup')
     .post(async (req, res) => {
+        let uidData = req.body.uid
         let emailData = req.body.email
         let passwordData = req.body.password
-        let uidData = req.body.uid
         if (req.session.user != undefined) {
             return res.status(403).json({ error: "User already login" })
         }
@@ -57,8 +57,7 @@ router
         }
         let loginIn;
         try {
-            loginIn = await usersData.createUser(emailData, passwordData, uidData);
-            req.session.user = { id: loginIn.id, email: loginIn.email };
+            loginIn = await usersData.createUser(uidData, emailData, passwordData);
             res.status(200).json({ id: loginIn.id.toString(), email: loginIn.email });
         } catch (e) {
             res.status(400).json({ error: e });

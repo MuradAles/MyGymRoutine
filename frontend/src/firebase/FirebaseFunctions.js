@@ -2,7 +2,8 @@ import firebase from 'firebase/compat/app';
 
 async function doCreateUserWithEmailAndPassword(email, password) {
     await firebase.auth().createUserWithEmailAndPassword(email, password);
-    firebase.auth().currentUser.updateProfile({ email: email })
+    await firebase.auth().currentUser.updateProfile({ email: email })
+    return firebase.auth().currentUser
 }
 
 // async function doChangePassword(email, oldPassword, newPassword) {
@@ -13,7 +14,7 @@ async function doCreateUserWithEmailAndPassword(email, password) {
 // }
 
 async function doSignInUserWithEmailAndPassword(email, password) {
-    await firebase.auth().signInUserWithEmailAndPassword(email, password);
+    await firebase.auth().signInWithEmailAndPassword(email, password);
 }
 
 async function doSocialSignIn(provider) {
