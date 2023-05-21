@@ -39,6 +39,7 @@ router
     .post(async (req, res) => {
         let emailData = req.body.email
         let passwordData = req.body.password
+        let uidData = req.body.uid
         if (req.session.user != undefined) {
             return res.status(403).json({ error: "User already login" })
         }
@@ -56,7 +57,7 @@ router
         }
         let loginIn;
         try {
-            loginIn = await usersData.createUser(emailData, passwordData);
+            loginIn = await usersData.createUser(emailData, passwordData, uidData);
             req.session.user = { id: loginIn.id, email: loginIn.email };
             res.status(200).json({ id: loginIn.id.toString(), email: loginIn.email });
         } catch (e) {

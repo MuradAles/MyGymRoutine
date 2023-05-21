@@ -4,7 +4,7 @@ const validation = require('../validation');
 const bcrypt = require('bcryptjs');
 const saltRounds = 12;
 
-const createUser = async (email, password) => {
+const createUser = async (email, password, uid) => {
     try {
         email = validation.validateEmail(email)
     } catch (e) {
@@ -20,6 +20,7 @@ const createUser = async (email, password) => {
     let usernameDuplication = await usersDataCollection.findOne({ "email": email });
     if (usernameDuplication !== null) throw 'Email already exists';
     let newUser = {
+        _id: uid,
         email: email,
         password: password
     };

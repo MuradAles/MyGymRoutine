@@ -1,15 +1,15 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useContext } from "react";
 import { doCreateUserWithEmailAndPassword } from "../firebase/FirebaseFunctions";
 import { AuthContext } from "../firebase/Auth";
 
 function SignUp() {
     const { currentUser } = useContext(AuthContext);
     const [pwMatch, setPwMatch] = useState('')
-    console.log(currentUser)
 
+    console.log(currentUser.uid)
     const handleSubmite = async (e) => {
         e.preventDefault();
-        const { email_Intput, password_Intput, repeat_password_Intput } = e.target.elements
+        const { email_Intput, password_Intput, repeat_password_Intput } = e.target
         if (password_Intput.value !== repeat_password_Intput.value) {
             setPwMatch('Passwords do not match');
             return false;
