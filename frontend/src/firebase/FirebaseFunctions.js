@@ -1,17 +1,11 @@
 import firebase from 'firebase/compat/app';
 
 async function doCreateUserWithEmailAndPassword(email, password) {
-    await firebase.auth().createUserWithEmailAndPassword(email, password);
-    await firebase.auth().currentUser.updateProfile({ email: email })
-    return firebase.auth().currentUser
+    const userCredential = await firebase.auth().createUserWithEmailAndPassword(email, password);
+    const user = userCredential.user;
+    await doSignOut();
+    return user.uid;
 }
-
-// async function doChangePassword(email, oldPassword, newPassword) {
-//     let credential = firebase.auth.EmailAuthProvider.credential(email, oldPassword);
-//     await firebase.auth().currentUser.reauthenticateWithCredential(credential);
-//     await firebase.auth().currentUser.updatePassword(newPassword);
-//     await doSignOut();
-// }
 
 async function doSignInUserWithEmailAndPassword(email, password) {
     await firebase.auth().signInWithEmailAndPassword(email, password);
@@ -25,6 +19,16 @@ async function doSocialSignIn(provider) {
     await firebase.auth().signInWithPopup(socialProcider);
 }
 
+async function doSignOut() {
+    await firebase.auth().signOut();
+}
+
+// async function doChangePassword(email, oldPassword, newPassword) {
+//     let credential = firebase.auth.EmailAuthProvider.credential(email, oldPassword);
+//     await firebase.auth().currentUser.reauthenticateWithCredential(credential);
+//     await firebase.auth().currentUser.updatePassword(newPassword);
+//     await doSignOut();
+// }
 
 // async function doPasswordReset(email) {
 //     await firebase.auth().sendPasswordReset(email);
@@ -34,17 +38,13 @@ async function doSocialSignIn(provider) {
 //     await firebase.auth().passwordUpdate(email);
 // }
 
-async function doSignOut() {
-    await firebase.auth().signOut();
-}
-
 
 export {
     doCreateUserWithEmailAndPassword,
-    // doChangePassword,
     doSignInUserWithEmailAndPassword,
     doSocialSignIn,
+    doSignOut,
+    // doChangePassword,
     // doPasswordReset,
     // doPasswordUpdate
-    doSignOut
 };

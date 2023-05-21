@@ -9,9 +9,18 @@ function Homepage() {
     return (
         <div className="App">
             <p>HomePage</p>
-            <Login />
-            <SignUp />
-            <Logout />
+            {currentUser ? (
+                <>
+                    <p>Auth</p>
+                    <Logout />
+                </>
+            ) : (
+                <>
+                    <p>No Auth</p>
+                    <Login />
+                    <SignUp />
+                </>
+            )}
         </div>
     );
 }

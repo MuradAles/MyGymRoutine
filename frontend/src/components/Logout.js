@@ -1,8 +1,23 @@
 import { doSignOut } from '../firebase/FirebaseFunctions'
 
 function Logout() {
+    const handleLogOut = async () => {
+        try {
+            await doSignOut();
+            await fetch('/users/logout', {
+                method: 'GET',
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            })
+        } catch (error) {
+            alert(error);
+        }
+    }
     return (
-        <button type='button' onClick={doSignOut}>Log out</button>
+        <form onSubmit={handleLogOut}>
+            <button type='submit'>Log out</button>
+        </form>
     );
 }
 

@@ -1,32 +1,29 @@
-import { useState, useContext } from "react";
+import { useState } from "react";
 import { doCreateUserWithEmailAndPassword } from "../firebase/FirebaseFunctions";
-import { AuthContext } from "../firebase/Auth";
 
 function SignUp() {
-    const { currentUser } = useContext(AuthContext);
     const [pwMatch, setPwMatch] = useState('')
     const handleSubmite = async (e) => {
         e.preventDefault();
-        const { email_Intput, password_Intput, repeat_password_Intput } = e.target
-        if (password_Intput.value !== repeat_password_Intput.value) {
+        const { signup_email_Intput, signup_password_Intput, signup_repeat_password_Intput } = e.target
+        if (signup_password_Intput.value !== signup_repeat_password_Intput.value) {
             setPwMatch('Passwords do not match');
             return false;
         }
         try {
             let userId = await doCreateUserWithEmailAndPassword(
-                email_Intput.value,
-                password_Intput.value,
+                signup_email_Intput.value,
+                signup_password_Intput.value,
             )
-            console.log("userId", userId)
             await fetch('/users/signup', {
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
-                    uid: userId.uid,
-                    email: email_Intput.value,
-                    password: password_Intput.value
+                    uid: userId,
+                    email: signup_email_Intput.value,
+                    password: signup_password_Intput.value
                 })
             })
         } catch (error) {
@@ -40,11 +37,11 @@ function SignUp() {
             <form onSubmit={handleSubmite}>
                 <div className="login_Div">
                     <div className="email_Div">
-                        <label htmlFor="email_Intput">
+                        <label htmlFor="signup_email_Intput">
                             Email:
                             <input
                                 className="input_tag"
-                                id="email_Intput"
+                                id="signup_email_Intput"
                                 placeholder="email"
                                 autoComplete="off"
                                 required
@@ -52,11 +49,11 @@ function SignUp() {
                         </label>
                     </div>
                     <div className="password_Div">
-                        <label htmlFor="password_Intput">
+                        <label htmlFor="signup_password_Intput">
                             Password:
                             <input
                                 className="input_tag"
-                                id="password_Intput"
+                                id="signup_password_Intput"
                                 placeholder="password"
                                 type="password"
                                 autoComplete="off"
@@ -65,11 +62,11 @@ function SignUp() {
                         </label>
                     </div>
                     <div className="repeat_password_Div">
-                        <label htmlFor="repeat_password_Intput">
+                        <label htmlFor="signup_repeat_password_Intput">
                             Repeat Password:
                             <input
                                 className="input_tag"
-                                id="repeat_password_Intput"
+                                id="signup_repeat_password_Intput"
                                 placeholder="password"
                                 type="password"
                                 autoComplete="off"
