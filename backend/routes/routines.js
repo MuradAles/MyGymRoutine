@@ -8,10 +8,12 @@ router
     .route('/create')
     .post(async (req, res) => {
         const userId = req.body.userId
+        const routineName = req.body.routineName
         let routines = [];
         try {
-            routines = await routinesData.createRoutine(userId);
-            res.status(200).json(routines);
+            routines = await routinesData.createRoutine(userId, routineName);
+            console.log(routines)
+            res.status(200).json({ createdRoutine: routines });
         } catch (e) {
             res.status(400).json({ error: e });
             return;
@@ -25,7 +27,7 @@ router
         let routines = [];
         try {
             routines = await routinesData.getAllRoutines(userId);
-            res.status(200).json(routines);
+            res.status(200).json({ routinesList: routines });
         } catch (e) {
             res.status(400).json({ error: e });
             return;
@@ -39,7 +41,7 @@ router
         let routines = [];
         try {
             routines = await routinesData.getRoutine(routineId);
-            res.status(200).json(routines);
+            res.status(200).json({ currentRoutine: routines });
         } catch (e) {
             res.status(400).json({ error: e });
             return;

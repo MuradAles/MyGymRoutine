@@ -18,13 +18,14 @@ const createRoutine = async (userId, nameRoutine) => {
     }
     const newInsertInformation = await routinesDataCollection.insertOne(data);
     if (newInsertInformation.insertedCount === 0) throw 'Insert failed! (Routine)';
-    return { Message: "Routine been created" };
+    let newRoutine = getRoutine(newInsertInformation.insertedId.toString())
+    return newRoutine;
 };
 
 const getAllRoutines = async (UserId) => {
     const routinesDataCollection = await routinesData();
     const allRoutines = await routinesDataCollection.find({ user: UserId }).toArray();
-    if (allRoutines.length === 0) throw 'No Routines found';
+    if (allRoutines.length === 0) return [];
     return allRoutines
 };
 
