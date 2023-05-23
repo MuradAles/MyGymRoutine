@@ -12,7 +12,6 @@ router
         let routines = [];
         try {
             routines = await routinesData.createRoutine(userId, routineName);
-            console.log(routines)
             res.status(200).json({ createdRoutine: routines });
         } catch (e) {
             res.status(400).json({ error: e });
@@ -38,9 +37,10 @@ router
     .route('/getRoutine')
     .post(async (req, res) => {
         const routineId = req.body.routineId
+        const userId = req.body.userId
         let routines = [];
         try {
-            routines = await routinesData.getRoutine(routineId);
+            routines = await routinesData.getRoutine(userId, routineId);
             res.status(200).json({ currentRoutine: routines });
         } catch (e) {
             res.status(400).json({ error: e });
@@ -65,11 +65,12 @@ router
 router
     .route('/addExerciseToRoutine')
     .post(async (req, res) => {
-        routineId = req.body.routineId
-        date = req.body.date
-        exerciseId = req.body.exerciseId
+        const userId = req.body.user
+        const routineId = req.body.routineId
+        const date = req.body.date
+        const exerciseId = req.body.exerciseId
         try {
-            await routinesData.addExerciseToRoutine(routineId, date, exerciseId);
+            await routinesData.addExerciseToRoutine(userId, routineId, date, exerciseId);
             res.status(200).json({ Message: "Exersise been added to routine" });
         } catch (e) {
             res.status(400).json({ error: e });

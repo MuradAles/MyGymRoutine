@@ -1,5 +1,6 @@
-import Logout from "../components/Logout"
-import RoutineList from "../components/RoutineList"
+import Logout from "../components/Authorization/Logout"
+import RoutineList from "../components/Routine/RoutineList"
+import DayList from "../components/Routine/DaysList"
 import { useContext, useEffect, useState } from "react"
 import { AuthContext } from "../firebase/Auth"
 import { Navigate } from 'react-router-dom';
@@ -33,7 +34,7 @@ function RoutinesPage() {
         }
         getAllRoutines()
     }, [])
-    // /create
+    // /createRoutine
     const HandleCreateRoutine = async (e) => {
         e.preventDefault();
         const { Rname_Intput } = e.target
@@ -67,12 +68,13 @@ function RoutinesPage() {
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
+                    userId: currentUser.uid,
                     routineId: RoutineId
                 })
             })
             if (response.ok) {
                 const data = await response.json();
-                console.log("data", data)
+                setCurrentR(data.currentRoutine)
             } else {
                 throw new Error('Request failed with status: ' + response.status);
             }
@@ -104,7 +106,7 @@ function RoutinesPage() {
             alert(e);
         }
     }
-    const addExerciseToRoutine = async (routineId, date, exerciseId) => {
+    const addExerciseToRoutine = async (userId, routineId, date, exerciseId) => {
         try {
             await fetch('/routines/addExerciseToRoutine', {
                 method: 'POST',
@@ -112,6 +114,7 @@ function RoutinesPage() {
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
+                    user: userId,
                     routineId: routineId,
                     date: date,
                     exerciseId: exerciseId
@@ -138,7 +141,6 @@ function RoutinesPage() {
             alert(e);
         }
     }
-
     return (
         <>
             {!currentUser ? (
@@ -147,7 +149,9 @@ function RoutinesPage() {
                 <>
                     <div className="App">
                         <div className="Top_Bar">
-                            <div className="RoutineList"><RoutineList list={RList} /></div>
+                            <div className="RoutineList">
+                                <RoutineList list={RList} getRoutine={getRoutine} />
+                            </div>
                             <div className="HandleCreateRoutine">
                                 <form onSubmit={HandleCreateRoutine}>
                                     <label htmlFor="Rname_Intput">
@@ -166,7 +170,7 @@ function RoutinesPage() {
                             <div className="Logout"><Logout /></div>
                         </div>
                         <div className="Bottom_Bar">
-
+                            <DayList currentR={currentR} />
                         </div>
                     </div>
 

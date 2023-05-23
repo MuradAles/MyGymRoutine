@@ -1,5 +1,5 @@
-import Login from "../components/Login"
-import SignUp from "../components/SignUp"
+import Login from "../components/Authorization/Login"
+import SignUp from "../components/Authorization/SignUp"
 import { useContext } from "react"
 import { AuthContext } from "../firebase/Auth"
 import { Navigate } from 'react-router-dom';

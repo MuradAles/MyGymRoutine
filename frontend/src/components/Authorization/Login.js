@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { doSignInUserWithEmailAndPassword } from "../firebase/FirebaseFunctions";
+import { doSignInUserWithEmailAndPassword } from "../../firebase/FirebaseFunctions";
 
 function Login() {
     const handleSubmite = async (e) => {

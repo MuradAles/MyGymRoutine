@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { doCreateUserWithEmailAndPassword } from "../firebase/FirebaseFunctions";
+import { doCreateUserWithEmailAndPassword } from "../../firebase/FirebaseFunctions";
 
 function SignUp() {
     const [pwMatch, setPwMatch] = useState('')

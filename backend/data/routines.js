@@ -29,10 +29,10 @@ const getAllRoutines = async (UserId) => {
     return allRoutines
 };
 
-const getRoutine = async (routineId) => {
+const getRoutine = async (userId, routineId) => {
     const routinesDataCollection = await routinesData();
     const objectId = new ObjectId(routineId);
-    const oneRoutine = await routinesDataCollection.findOne({ _id: objectId });
+    const oneRoutine = await routinesDataCollection.findOne({ user: userId, _id: objectId });
     if (oneRoutine === null) throw 'No Routine found';
     return oneRoutine
 };
@@ -45,11 +45,12 @@ const deleteRoutine = async (routineId) => {
     return true;
 };
 
-const addExerciseToRoutine = async (routineId, date, exerciseId) => {
+const addExerciseToRoutine = async (userId, routineId, date, exerciseId) => {
     const routinesDataCollection = await routinesData();
     const objectId = new ObjectId(routineId);
     const addResult = await routinesDataCollection.updateOne(
         { _id: objectId },
+        { user: userId },
         { $push: { [date]: exerciseId } }
     );
     if (addResult.modifiedCount === 0) throw 'Exercise not found';
