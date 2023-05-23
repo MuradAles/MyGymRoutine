@@ -18,7 +18,7 @@ const createRoutine = async (userId, nameRoutine) => {
     }
     const newInsertInformation = await routinesDataCollection.insertOne(data);
     if (newInsertInformation.insertedCount === 0) throw 'Insert failed! (Routine)';
-    let newRoutine = getRoutine(newInsertInformation.insertedId.toString())
+    let newRoutine = getRoutine(userId, newInsertInformation.insertedId.toString())
     return newRoutine;
 };
 
@@ -49,12 +49,11 @@ const addExerciseToRoutine = async (userId, routineId, date, exerciseId) => {
     const routinesDataCollection = await routinesData();
     const objectId = new ObjectId(routineId);
     const addResult = await routinesDataCollection.updateOne(
-        { _id: objectId },
-        { user: userId },
+        { _id: objectId, user: userId },
         { $push: { [date]: exerciseId } }
     );
     if (addResult.modifiedCount === 0) throw 'Exercise not found';
-    return { Message: "Exersise been added from routine" };
+    return await getRoutine(userId, routineId);
 };
 
 const deleteExerciseFromRoutine = async (routineId, date, exerciseId) => {

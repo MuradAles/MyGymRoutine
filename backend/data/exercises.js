@@ -1,6 +1,7 @@
 const mongoCollections = require('../config/mongoCollections');
 const exercisesData = mongoCollections.exercises;
 const validation = require('../validation');
+const { ObjectId } = require('mongodb');
 
 const createExercise = async (data) => {
     const exercisesDataCollection = await exercisesData();
@@ -37,4 +38,12 @@ const showExercisesByFilter = async (data) => {
     return exercisesOfConversation
 }
 
-module.exports = { createExercise, showExercisesByFilter }
+const getExercise = async (exerciseId) => {
+    const exercisesDataCollection = await exercisesData();
+    const objectId = new ObjectId(exerciseId);
+    const oneExercise = await exercisesDataCollection.findOne({ _id: objectId });
+    if (oneExercise === null) throw 'No Routine found';
+    return oneExercise
+};
+
+module.exports = { createExercise, showExercisesByFilter, getExercise }

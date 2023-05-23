@@ -1,0 +1,26 @@
+.oneExercise {
+    margin-bottom: 10px;
+}
+
+.oneExerciseName {
+    cursor: pointer;
+    background-color: #f2f2f2;
+    padding: 10px;
+}
+
+.oneExerciseBox {
+    position: absolute;
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+
+.oneExerciseBox ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.oneExerciseBox img {
+    margin-top: 10px;
+    max-width: 300px;
+}

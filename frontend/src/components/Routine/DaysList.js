@@ -1,14 +1,21 @@
+import React from 'react';
+import GetExercise from '../exercises/GetExercise';
+import './DaysList.css'
 const DayList = ({ currentR }) => {
     if (currentR !== null) {
-        const days = Object.keys(currentR).filter(key => ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'].includes(key));
+        const days = Object.keys(currentR).filter(key =>
+            ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'].includes(key)
+        );
         return (
-            <div>
+            <div className="day-list">
                 {days.map(day => (
-                    <div key={day}>
-                        <strong>{day}:</strong>
+                    <div key={day} className="day-column">
+                        <strong>{day}</strong>
                         <ul>
-                            {currentR[day].map((event, index) => (
-                                <li key={index}>{event}</li>
+                            {currentR[day].map((exerciseId, index) => (
+                                <li key={index}>
+                                    <GetExercise exerciseId={exerciseId} />
+                                </li>
                             ))}
                         </ul>
                     </div>
@@ -16,5 +23,8 @@ const DayList = ({ currentR }) => {
             </div>
         );
     }
-}
+
+    return null;
+};
+
 export default DayList;

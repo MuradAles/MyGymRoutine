@@ -70,8 +70,8 @@ router
         const date = req.body.date
         const exerciseId = req.body.exerciseId
         try {
-            await routinesData.addExerciseToRoutine(userId, routineId, date, exerciseId);
-            res.status(200).json({ Message: "Exersise been added to routine" });
+            let component = await routinesData.addExerciseToRoutine(userId, routineId, date, exerciseId);
+            res.status(200).json({ currentRoutine: component });
         } catch (e) {
             res.status(400).json({ error: e });
             return;

@@ -1,0 +1,17 @@
+ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.day-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    grid-gap: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.day-column {
+    border: 1px solid #ccc;
+    padding: 10px;
+}

@@ -14,11 +14,24 @@ router
         let exerciseList;
         try {
             exerciseList = await exerciseData.showExercisesByFilter(searchData)
+            res.status(200).json(exerciseList);
         } catch (e) {
             res.status(400).json({ error: e });
             return;
         }
-        return res.status(200).json(exerciseList);
+    })
+router
+    .route('/getExercise')
+    .post(async (req, res) => {
+        const exerciseId = req.body.exerciseId
+        let exerciseList;
+        try {
+            exerciseList = await exerciseData.getExercise(exerciseId)
+            res.status(200).json(exerciseList);
+        } catch (e) {
+            res.status(400).json({ error: e });
+            return;
+        }
     })
 
 module.exports = router;

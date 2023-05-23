@@ -35,7 +35,7 @@ function RoutinesPage() {
         getAllRoutines()
     }, [])
     // /createRoutine
-    const HandleCreateRoutine = async (e) => {
+    const createRoutine = async (e) => {
         e.preventDefault();
         const { Rname_Intput } = e.target
         try {
@@ -49,6 +49,7 @@ function RoutinesPage() {
                     routineName: Rname_Intput.value,
                 })
             })
+            console.log(response)
             if (response.ok) {
                 const data = await response.json();
                 setRList([...RList, data.createdRoutine])
@@ -59,7 +60,6 @@ function RoutinesPage() {
             alert(e);
         }
     }
-    // /getRoutine
     const getRoutine = async (RoutineId) => {
         try {
             const response = await fetch('/routines/getRoutine', {
@@ -106,41 +106,7 @@ function RoutinesPage() {
             alert(e);
         }
     }
-    const addExerciseToRoutine = async (userId, routineId, date, exerciseId) => {
-        try {
-            await fetch('/routines/addExerciseToRoutine', {
-                method: 'POST',
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    user: userId,
-                    routineId: routineId,
-                    date: date,
-                    exerciseId: exerciseId
-                })
-            })
-        } catch (e) {
-            alert(e);
-        }
-    }
-    const deleteExerciseFromRoutine = async (routineId, date, exerciseId) => {
-        try {
-            await fetch('/routines/deleteExerciseFromRoutine', {
-                method: 'POST',
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    routineId: routineId,
-                    date: date,
-                    exerciseId: exerciseId
-                })
-            })
-        } catch (e) {
-            alert(e);
-        }
-    }
+
     return (
         <>
             {!currentUser ? (
@@ -152,8 +118,8 @@ function RoutinesPage() {
                             <div className="RoutineList">
                                 <RoutineList list={RList} getRoutine={getRoutine} />
                             </div>
-                            <div className="HandleCreateRoutine">
-                                <form onSubmit={HandleCreateRoutine}>
+                            <div className="createRoutine">
+                                <form onSubmit={createRoutine}>
                                     <label htmlFor="Rname_Intput">
                                         Name new Routine
                                         <input

@@ -2,7 +2,6 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Homepage from './pages/HomePage';
 import RoutinesPage from './pages/RoutinesPage';
 import { AuthProvider } from './firebase/Auth';
-
 function App() {
   return (
     <AuthProvider>
