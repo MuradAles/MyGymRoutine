@@ -6,6 +6,7 @@ const deleteExerciseFromRoutine = async (userId, routineId, date, exerciseId) =>
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
+                userId: userId,
                 routineId: routineId,
                 date: date,
                 exerciseId: exerciseId
@@ -15,3 +16,5 @@ const deleteExerciseFromRoutine = async (userId, routineId, date, exerciseId) =>
         alert(e);
     }
 }
+
+export default deleteExerciseFromRoutine;

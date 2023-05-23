@@ -5,9 +5,9 @@ import { useContext, useEffect, useState } from "react"
 import { AuthContext } from "../firebase/Auth"
 import { Navigate } from 'react-router-dom';
 function RoutinesPage() {
+    const { currentUser } = useContext(AuthContext)
     const [RList, setRList] = useState([]);
     const [currentR, setCurrentR] = useState(null);
-    const { currentUser } = useContext(AuthContext)
     // /exercises/
     // /getAllRoutines
     useEffect(() => {
@@ -49,7 +49,6 @@ function RoutinesPage() {
                     routineName: Rname_Intput.value,
                 })
             })
-            console.log(response)
             if (response.ok) {
                 const data = await response.json();
                 setRList([...RList, data.createdRoutine])
@@ -79,26 +78,27 @@ function RoutinesPage() {
                 throw new Error('Request failed with status: ' + response.status);
             }
         } catch (e) {
-            alert(e);
+            console.log(e);
         }
     }
-    const deleteRoutine = async (e) => {
-        e.preventDefault();
-        const { Rname_Intput } = e.target
+    const deleteRoutine = async (userId, RoutineId) => {
         try {
             const response = await fetch('/routines/deleteRoutine', {
                 method: 'POST',
                 headers: {
-                    "Content-Type": "application/json"
+                    'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    userId: currentUser.uid,
-                    routineName: Rname_Intput.value,
+                    user: userId,
+                    routineId: RoutineId
                 })
-            })
+            });
             if (response.ok) {
                 const data = await response.json();
-                setRList([...RList, data.createdRoutine])
+                setRList(data.deleteRoutine)
+                if (currentR._id === RoutineId) {
+                    setCurrentR(null);
+                }
             } else {
                 throw new Error('Request failed with status: ' + response.status);
             }
@@ -113,10 +113,10 @@ function RoutinesPage() {
                 <Navigate to='/' />
             ) : (
                 <>
-                    <div className="App">
+                    <div className="Routine">
                         <div className="Top_Bar">
                             <div className="RoutineList">
-                                <RoutineList list={RList} getRoutine={getRoutine} />
+                                <RoutineList userId={currentUser.uid} list={RList} getRoutine={getRoutine} deleteRoutine={deleteRoutine} />
                             </div>
                             <div className="createRoutine">
                                 <form onSubmit={createRoutine}>

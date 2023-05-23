@@ -51,11 +51,12 @@ router
 router
     .route('/deleteRoutine')
     .post(async (req, res) => {
+        const userId = req.body.user
         const routineId = req.body.routineId
         let routines = [];
         try {
-            routines = await routinesData.deleteRoutine(routineId);
-            res.status(200).json(routines);
+            routines = await routinesData.deleteRoutine(userId, routineId);
+            res.status(200).json({ deleteRoutine: routines });
         } catch (e) {
             res.status(400).json({ error: e });
             return;

@@ -24,7 +24,10 @@ const createRoutine = async (userId, nameRoutine) => {
 
 const getAllRoutines = async (UserId) => {
     const routinesDataCollection = await routinesData();
-    const allRoutines = await routinesDataCollection.find({ user: UserId }).toArray();
+    const allRoutines = await routinesDataCollection
+        .find({ user: UserId })
+        .project({ name: 1, _id: 1 })
+        .toArray();
     if (allRoutines.length === 0) return [];
     return allRoutines
 };
@@ -37,12 +40,13 @@ const getRoutine = async (userId, routineId) => {
     return oneRoutine
 };
 
-const deleteRoutine = async (routineId) => {
+const deleteRoutine = async (userId, routineId) => {
     const routinesDataCollection = await routinesData();
     const objectId = new ObjectId(routineId);
-    const oneRoutine = await routinesDataCollection.deleteOne({ _id: objectId });
+    const oneRoutine = await routinesDataCollection
+        .deleteOne({ user: userId, _id: objectId });
     if (oneRoutine.deletedCount === 0) throw `Could not delete Routine`;
-    return true;
+    return getAllRoutines(userId);
 };
 
 const addExerciseToRoutine = async (userId, routineId, date, exerciseId) => {
