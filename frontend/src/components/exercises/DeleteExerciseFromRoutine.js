@@ -19,6 +19,7 @@ const deleteExerciseFromRoutine = async (userId, routineId, date, exerciseId, se
             throw new Error('Request failed with status: ' + response.status);
         }
     } catch (e) {
+        console.log("deleteExerciseFromRoutine", e)
         alert(e);
     }
 }

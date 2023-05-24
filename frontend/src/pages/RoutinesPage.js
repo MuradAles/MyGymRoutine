@@ -29,6 +29,7 @@ function RoutinesPage() {
                     throw new Error('Request failed with status: ' + response.status);
                 }
             } catch (e) {
+                console.log("getAllRoutines", e)
                 alert(e);
             }
         }

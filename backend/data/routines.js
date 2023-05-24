@@ -63,13 +63,25 @@ const addExerciseToRoutine = async (userId, routineId, date, exerciseId) => {
 const deleteExerciseFromRoutine = async (userId, routineId, date, exerciseId) => {
     const routinesDataCollection = await routinesData();
     const objectId = new ObjectId(routineId);
-    const deleteResult = await routinesDataCollection.updateOne(
+    const routine = await routinesDataCollection.findOne({ _id: objectId, user: userId });
+    if (!routine) {
+        throw 'Routine not found';
+    }
+    const index = routine[date].indexOf(exerciseId);
+    if (index === -1) {
+        throw 'Exercise not found';
+    }
+    routine[date].splice(index, 1);
+    const updateResult = await routinesDataCollection.updateOne(
         { _id: objectId, user: userId },
-        { $pull: { [date]: exerciseId } }
+        { $set: { [date]: routine[date] } }
     );
-    if (deleteResult.modifiedCount === 0) throw 'Exercise not found';
-    return { Message: "Exersise been deleted from routine" };
+    if (updateResult.modifiedCount === 0) {
+        throw 'Exercise not found';
+    }
+    return { Message: "Exercise has been deleted from the routine" };
 };
+
 
 
 module.exports = { createRoutine, getAllRoutines, getRoutine, addExerciseToRoutine, deleteExerciseFromRoutine, deleteRoutine }

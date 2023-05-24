@@ -27,7 +27,7 @@ const GetExercise = ({ exerciseId, userId, routineId, date }) => {
                     throw new Error('Request failed with status: ' + response.status);
                 }
             } catch (e) {
-                alert(e);
+                console.log("getExercise", e)
             }
         };
 
