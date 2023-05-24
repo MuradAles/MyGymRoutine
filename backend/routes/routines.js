@@ -82,11 +82,12 @@ router
 router
     .route('/deleteExerciseFromRoutine')
     .post(async (req, res) => {
+        userId = req.body.user
         routineId = req.body.routineId
         date = req.body.date
         exerciseId = req.body.exerciseId
         try {
-            await routinesData.deleteExerciseFromRoutine(routineId, date, exerciseId);
+            await routinesData.deleteExerciseFromRoutine(userId, routineId, date, exerciseId);
             res.status(200).json({ Message: "Exersise been deleted to routine" });
         } catch (e) {
             res.status(400).json({ error: e });

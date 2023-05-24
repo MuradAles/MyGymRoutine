@@ -136,7 +136,7 @@ function RoutinesPage() {
                             <div className="Logout"><Logout /></div>
                         </div>
                         <div className="Bottom_Bar">
-                            <DayList currentR={currentR} />
+                            <DayList currentR={currentR} userId={currentUser.uid} />
                         </div>
                     </div>
 

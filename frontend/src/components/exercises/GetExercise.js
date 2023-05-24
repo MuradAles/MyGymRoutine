@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
+import deleteExerciseFromRoutine from './DeleteExerciseFromRoutine'
+import addExerciseToRoutine from "./AddExerciseToRoutine"
 import "./GetExercises.css"
 
-const GetExercise = ({ exerciseId }) => {
+const GetExercise = ({ exerciseId, userId, routineId, date }) => {
     const [exercise, setExercise] = useState(null);
     const [showDetails, setShowDetails] = useState(false);
 
@@ -36,6 +38,15 @@ const GetExercise = ({ exerciseId }) => {
         setShowDetails(!showDetails);
     };
 
+    const handleDeleteExercise = (e, userId, routineId) => {
+        e.stopPropagation();
+        deleteExerciseFromRoutine(userId, routineId, date, exerciseId, setExercise); // Pass setExercise as a parameter
+    }
+    const handleAddExercise = (e, userId, routineId) => {
+        e.stopPropagation();
+        addExerciseToRoutine(userId, routineId, date, exerciseId, setExercise); // Pass setExercise as a parameter
+    }
+
     if (exercise) {
         return (
             <div className='oneExercise'>
@@ -49,6 +60,7 @@ const GetExercise = ({ exerciseId }) => {
                             <li>target: {exercise.target}</li>
                             <li>bodyPart: {exercise.bodyPart}</li>
                             <li>equipment: {exercise.equipment}</li>
+                            <button onClick={(event) => handleDeleteExercise(event, userId, routineId)}>Delete</button>
                         </ul>
                     </div>
                 )}

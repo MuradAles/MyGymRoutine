@@ -1,7 +1,7 @@
 import React from 'react';
 import GetExercise from '../exercises/GetExercise';
 import './DaysList.css'
-const DayList = ({ currentR }) => {
+const DayList = ({ currentR, userId }) => {
     if (currentR !== null) {
         const days = Object.keys(currentR).filter(key =>
             ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'].includes(key)
@@ -14,7 +14,7 @@ const DayList = ({ currentR }) => {
                         <ul>
                             {currentR[day].map((exerciseId, index) => (
                                 <li key={index}>
-                                    <GetExercise exerciseId={exerciseId} />
+                                    <GetExercise userId={userId} routineId={currentR._id} date={day} exerciseId={exerciseId} />
                                 </li>
                             ))}
                         </ul>

@@ -1,17 +1,23 @@
-const deleteExerciseFromRoutine = async (userId, routineId, date, exerciseId) => {
+const deleteExerciseFromRoutine = async (userId, routineId, date, exerciseId, setExercise) => {
     try {
-        await fetch('/routines/deleteExerciseFromRoutine', {
+        const response = await fetch('/routines/deleteExerciseFromRoutine', {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                userId: userId,
+                user: userId,
                 routineId: routineId,
                 date: date,
                 exerciseId: exerciseId
             })
-        })
+        });
+        if (response.ok) {
+            const data = await response.json();
+            setExercise(data)
+        } else {
+            throw new Error('Request failed with status: ' + response.status);
+        }
     } catch (e) {
         alert(e);
     }

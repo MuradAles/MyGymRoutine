@@ -60,11 +60,11 @@ const addExerciseToRoutine = async (userId, routineId, date, exerciseId) => {
     return await getRoutine(userId, routineId);
 };
 
-const deleteExerciseFromRoutine = async (routineId, date, exerciseId) => {
+const deleteExerciseFromRoutine = async (userId, routineId, date, exerciseId) => {
     const routinesDataCollection = await routinesData();
     const objectId = new ObjectId(routineId);
     const deleteResult = await routinesDataCollection.updateOne(
-        { _id: objectId },
+        { _id: objectId, user: userId },
         { $pull: { [date]: exerciseId } }
     );
     if (deleteResult.modifiedCount === 0) throw 'Exercise not found';
