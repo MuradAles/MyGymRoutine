@@ -1,0 +1,18 @@
+.Top_Bar {
+    display: flex;
+}
+
+.RoutineList {
+    order: 1;
+    flex: 1;
+}
+
+.CurrentName {
+    order: 2;
+    flex: 1;
+}
+
+.Logout {
+    order: 3;
+    flex: 1;
+}

@@ -4,6 +4,7 @@ import DayList from "../components/Routine/DaysList"
 import { useContext, useEffect, useState } from "react"
 import { AuthContext } from "../firebase/Auth"
 import { Navigate } from 'react-router-dom';
+import "./RoutinesPage.css"
 function RoutinesPage() {
     const { currentUser } = useContext(AuthContext)
     const [RList, setRList] = useState([]);
@@ -116,30 +117,26 @@ function RoutinesPage() {
                     <div className="Routine">
                         <div className="Top_Bar">
                             <div className="RoutineList">
-                                <RoutineList userId={currentUser.uid} list={RList} getRoutine={getRoutine} deleteRoutine={deleteRoutine} />
+                                <RoutineList userId={currentUser.uid} list={RList} getRoutine={getRoutine} deleteRoutine={deleteRoutine} createRoutine={createRoutine} />
                             </div>
-                            <div className="createRoutine">
-                                <form onSubmit={createRoutine}>
-                                    <label htmlFor="Rname_Intput">
-                                        Name new Routine
-                                        <input
-                                            className="input_tag"
-                                            id="Rname_Intput"
-                                            placeholder="Routine Name"
-                                            autoComplete="off"
-                                            required
-                                        />
-                                    </label>
-                                    <button type="submit">Create Routine</button>
-                                </form>
+                            <div className="CurrentName">
+                                {currentR ? (
+                                    <>
+                                        {currentR.name}
+                                    </>
+                                ) : (
+                                    <>
+                                    </>
+                                )}
                             </div>
-                            <div className="Logout"><Logout /></div>
+                            <div className="Logout">
+                                <Logout />
+                            </div>
                         </div>
                         <div className="Bottom_Bar">
                             <DayList currentR={currentR} userId={currentUser.uid} setCurrentR={setCurrentR} />
                         </div>
                     </div>
-
                 </>
             )}
         </>
