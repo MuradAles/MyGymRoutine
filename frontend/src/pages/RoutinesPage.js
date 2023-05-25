@@ -8,7 +8,6 @@ function RoutinesPage() {
     const { currentUser } = useContext(AuthContext)
     const [RList, setRList] = useState([]);
     const [currentR, setCurrentR] = useState(null);
-    // /exercises/
     // /getAllRoutines
     useEffect(() => {
         const getAllRoutines = async () => {
@@ -137,7 +136,7 @@ function RoutinesPage() {
                             <div className="Logout"><Logout /></div>
                         </div>
                         <div className="Bottom_Bar">
-                            <DayList currentR={currentR} userId={currentUser.uid} />
+                            <DayList currentR={currentR} userId={currentUser.uid} setCurrentR={setCurrentR} />
                         </div>
                     </div>
 

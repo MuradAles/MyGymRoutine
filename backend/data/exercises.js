@@ -34,7 +34,8 @@ const showExercisesByFilter = async (data) => {
         .toArray();
     const count = await exercisesDataCollection
         .countDocuments(searchData);
-    return exercisesOfConversation
+    const returnedExercises = { exercisesOfConversation: exercisesOfConversation, count: count }
+    return returnedExercises
 }
 
 const getExercise = async (exerciseId) => {

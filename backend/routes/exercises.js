@@ -12,6 +12,7 @@ router
         if (req.body.target !== undefined) searchData.target = req.body.target;
         if (req.body.bodyPart !== undefined) searchData.bodyPart = req.body.bodyPart;
         let exerciseList;
+        let count;
         try {
             exerciseList = await exerciseData.showExercisesByFilter(searchData)
             res.status(200).json(exerciseList);

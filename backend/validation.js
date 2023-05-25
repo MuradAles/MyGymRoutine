@@ -25,11 +25,10 @@ const validateEmail = (email) => {
 }
 
 const checkPageValidation = (page) => {
-    console.log(page)
     if (isNaN(page)) { page = 1 }
-    if (!Number.isInteger(page)) throw "page is not a number";
-    if (page <= 0) throw "page cannot be negative or zero";
-    if (page % 1 != 0) throw "page cannot be float numebr";
+    if (!Number.isInteger(page)) { page = 1 }
+    if (page <= 0) { page = 1 }
+    if (page % 1 != 0) { page = 1 }
     return page
 }
 
