@@ -1,4 +1,4 @@
-const deleteExerciseFromRoutine = async (userId, routineId, date, exerciseId, setExercise) => {
+const deleteExerciseFromRoutine = async (userId, routineId, date, exerciseId) => {
     try {
         const response = await fetch('/routines/deleteExerciseFromRoutine', {
             method: 'POST',
@@ -14,7 +14,7 @@ const deleteExerciseFromRoutine = async (userId, routineId, date, exerciseId, se
         });
         if (response.ok) {
             const data = await response.json();
-            setExercise(data)
+            console.log(data)
         } else {
             throw new Error('Request failed with status: ' + response.status);
         }

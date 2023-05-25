@@ -4,10 +4,10 @@ const data = require('../data');
 const exerciseData = data.exercises;
 
 router
-    .route('/')
+    .route('/searchExercise')
     .post(async (req, res) => {
         const searchData = {};
-        if (req.body.page !== undefined) searchData.page = req.body.page
+        if (req.body.page !== undefined) searchData.page = req.body.page;
         if (req.body.search !== undefined) searchData.name = req.body.search;
         if (req.body.target !== undefined) searchData.target = req.body.target;
         if (req.body.bodyPart !== undefined) searchData.bodyPart = req.body.bodyPart;

@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
 import deleteExerciseFromRoutine from './DeleteExerciseFromRoutine'
-import addExerciseToRoutine from "./AddExerciseToRoutine"
 import "./GetExercises.css"
 
 const GetExercise = ({ exerciseId, userId, routineId, date }) => {
     const [exercise, setExercise] = useState(null);
     const [showDetails, setShowDetails] = useState(false);
+    const [isVisible, setIsVisible] = useState(true);
 
     useEffect(() => {
         const fetchExercise = async () => {
@@ -40,18 +40,16 @@ const GetExercise = ({ exerciseId, userId, routineId, date }) => {
 
     const handleDeleteExercise = (e, userId, routineId) => {
         e.stopPropagation();
-        deleteExerciseFromRoutine(userId, routineId, date, exerciseId, setExercise); // Pass setExercise as a parameter
+        deleteExerciseFromRoutine(userId, routineId, date, exerciseId, setExercise);
+        setIsVisible(false);
     }
-    const handleAddExercise = (e, userId, routineId) => {
-        e.stopPropagation();
-        addExerciseToRoutine(userId, routineId, date, exerciseId, setExercise); // Pass setExercise as a parameter
-    }
-
-    if (exercise) {
+    if (exercise && isVisible) {
         return (
             <div className='oneExercise'>
                 <div className='oneExerciseName' onClick={toggleDetails}>
                     {exercise.name}
+                </div>
+                <div className="searchBox">
                 </div>
                 {showDetails && (
                     <div className='oneExerciseBox'>

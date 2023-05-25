@@ -14,7 +14,7 @@ const showExercisesByFilter = async (data) => {
     const exercisesDataCollection = await exercisesData();
     const searchData = {};
     try {
-        page = validation.checkPageValidation(data.page)
+        page = validation.checkPageValidation(Number(data.page))
     } catch (e) {
         return (e);
     }
@@ -34,7 +34,6 @@ const showExercisesByFilter = async (data) => {
         .toArray();
     const count = await exercisesDataCollection
         .countDocuments(searchData);
-    console.log(count);
     return exercisesOfConversation
 }
 
