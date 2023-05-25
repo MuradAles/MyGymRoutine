@@ -1,18 +1,43 @@
 .Top_Bar {
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 10px;
     display: flex;
+    align-items: center;
+    background-color: rgb(35, 38, 41);
 }
 
 .RoutineList {
     order: 1;
-    flex: 1;
 }
 
 .CurrentName {
     order: 2;
     flex: 1;
+    text-align: center;
 }
 
 .Logout {
     order: 3;
-    flex: 1;
+    margin-right: auto;
+}
+
+ul {
+    list-style-type: none;
+    margin: 10px;
+    padding: 0;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: "Bahnschrift SemiBold", monospace;
+}
+
+.Name_h1 {
+    color: rgb(255, 255, 255);
 }

@@ -122,10 +122,11 @@ function RoutinesPage() {
                             <div className="CurrentName">
                                 {currentR ? (
                                     <>
-                                        {currentR.name}
+                                        <h1 className="Name_h1">{currentR.name}</h1>
                                     </>
                                 ) : (
                                     <>
+
                                     </>
                                 )}
                             </div>

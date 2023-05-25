@@ -77,7 +77,7 @@ const DayList = ({ currentR, userId, setCurrentR }) => {
             ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'].includes(key)
         );
         return (
-            <div className="day-list">
+            <div className="day_list">
                 {days.map((day) => (
                     <React.Fragment key={day}>
                         <div key={day} className="day_column_right">
@@ -89,15 +89,7 @@ const DayList = ({ currentR, userId, setCurrentR }) => {
                                         <button onClick={handlePrevious} disabled={formValues.page === 1}>
                                             Previous
                                         </button>
-                                        <input
-                                            className="input_tag"
-                                            type="number"
-                                            id="page"
-                                            min="1"
-                                            max={maxPage}
-                                            value={formValues.page}
-                                            onChange={(e) => setFormValues({ ...formValues, page: e.target.value })}
-                                        />
+                                        {formValues.page}
                                         <button onClick={handleNext} disabled={formValues.page === maxPage}>
                                             Next
                                         </button>

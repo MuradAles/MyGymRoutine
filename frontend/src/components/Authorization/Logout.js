@@ -16,7 +16,7 @@ function Logout() {
     }
     return (
         <form onSubmit={handleLogOut}>
-            <button type='submit'>Log out</button>
+            <button className="button-50" type='submit'>Log out</button>
         </form>
     );
 }
