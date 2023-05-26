@@ -42,6 +42,10 @@ const DayList = ({ currentR, userId, setCurrentR }) => {
         }
     }, [showSearchForm, formValues]);
 
+    useEffect(() => {
+        setShowSearchForm(false);
+    }, [currentR]);
+
     const toggleSearchForm = (day) => {
         setShowSearchForm((prevState) => !prevState);
         setSelectedDay(day);

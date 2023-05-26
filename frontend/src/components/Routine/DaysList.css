@@ -24,6 +24,7 @@
 
 .DayName {
     flex: 1;
+    font-size: 16px;
 }
 
 .Search {
@@ -60,6 +61,9 @@
 
 .exercisesList {
     padding-bottom: 10px;
+    border: 3px solid #6a6a6a;
+    border-radius: 10px;
+    margin-bottom: 2px;
 }
 
 .left {
