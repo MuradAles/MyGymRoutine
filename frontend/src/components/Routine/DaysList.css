@@ -30,9 +30,8 @@
     flex: 1;
 }
 
+
 .day_list {
-    display: flex;
-    flex-wrap: wrap;
     justify-content: center;
 }
 
@@ -41,14 +40,13 @@
     margin-right: 5px;
 }
 
-.day_column_left,
-.day_column_right {
+.day_column {
     flex-basis: 50%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 10px;
     box-sizing: border-box;
+    border-bottom: 1px solid #ccc;
 }
 
 .DayName {
@@ -62,4 +60,8 @@
 
 .exercisesList {
     padding-bottom: 10px;
+}
+
+.left {
+    margin-left: 55px;
 }

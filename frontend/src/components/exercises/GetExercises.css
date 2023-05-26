@@ -6,6 +6,7 @@
     width: 300px;
     cursor: pointer;
     background-color: #f2f2f2;
+    border: 1px solid #ccc;
     padding: 10px;
 }
 
@@ -15,6 +16,7 @@
     background-color: #ffffff;
     border: 1px solid #ccc;
     padding: 10px;
+    max-width: 300px;
 }
 
 .oneExerciseBox ul {
@@ -30,8 +32,29 @@
 .searchBox {
     background-color: aqua;
     width: 340px;
-    height: 500px;
-    overflow-y: scroll;
+    height: 700px;
     position: absolute;
     z-index: 2;
+    border: 4px solid black;
+    border-radius: 10px;
+}
+
+.searchBoxResult {
+    margin-top: 10px;
+    overflow-y: scroll;
+    height: 580px;
+}
+
+.searchBoxResult::-webkit-scrollbar {
+    width: 10px;
+    background-color: rgb(51, 51, 51);
+}
+
+.searchBoxResult::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(255, 252, 252, 0.3);
+}
+
+.searchBoxResult::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: dodgerblue;
 }
