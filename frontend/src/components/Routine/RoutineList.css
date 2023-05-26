@@ -1,5 +1,6 @@
 .dropdown_menu {
     position: absolute;
+    z-index: 3;
     padding-bottom: 10px;
     background-color: rgb(35, 38, 41);
     width: 500px;

@@ -80,43 +80,55 @@ const DayList = ({ currentR, userId, setCurrentR }) => {
             <div className="day_list">
                 {days.map((day) => (
                     <React.Fragment key={day}>
-                        <div key={day} className="day_column_right">
-                            <strong>{day}</strong>
+                        <div key={day} className="day_column_left">
+                            <div className='DayName'>
+                                <strong>{day}</strong>
+                            </div>
+                            <ul>
+                                {currentR[day].map((exerciseId, index) => (
+                                    <li key={index}>
+                                        <GetExercise userId={userId} routineId={currentR._id} date={day} exerciseId={exerciseId} />
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                        <div className='day_column_right'>
                             {showSearchForm && selectedDay === day ? (
                                 <div className="searchBox">
                                     <div className='Pagination'>
-                                        <label htmlFor="page">Page:</label>
-                                        <button onClick={handlePrevious} disabled={formValues.page === 1}>
+                                        <label htmlFor="search">
+                                            <input
+                                                className="input_tag"
+                                                id="search"
+                                                placeholder="Enter search"
+                                                autoComplete="off"
+                                                onChange={(e) => setFormValues({ ...formValues, page: 1, search: e.target.value })}
+                                            />
+                                        </label>
+                                        <button className="button-54" type="button" onClick={() => toggleSearchForm(day)}>
+                                            Close
+                                        </button>
+
+                                        <br />
+                                        <button className="button-54" onClick={handlePrevious} disabled={formValues.page === 1}>
                                             Previous
                                         </button>
-                                        {formValues.page}
-                                        <button onClick={handleNext} disabled={formValues.page === maxPage}>
+                                        <span className="page">{formValues.page}</span>
+                                        <button className="button-54" onClick={handleNext} disabled={formValues.page === maxPage}>
                                             Next
-                                        </button>
-                                        <label htmlFor="search">Search:</label>
-                                        <input
-                                            className="input_tag"
-                                            id="search"
-                                            placeholder="Enter search query"
-                                            autoComplete="off"
-                                            onChange={(e) => setFormValues({ ...formValues, page: 1, search: e.target.value })}
-                                        />
-                                        <button type="button" onClick={() => toggleSearchForm(day)}>
-                                            Close
                                         </button>
                                     </div>
                                     <div className='Exercises_Search'></div>
                                     {exerciseList.length > 0 && (
                                         <div className="searchBoxResult">
-                                            <h4>Search Results</h4>
                                             <ul>
                                                 {exerciseList.map((exercise, index) => (
-                                                    <li key={index}>
+                                                    <li className="exercisesList" key={index}>
                                                         {exercise.name}
                                                         <br />
                                                         <img src={exercise.gifUrl} alt="GIF" />
                                                         <br />
-                                                        <button
+                                                        <button className="button-54"
                                                             onClick={(event) =>
                                                                 handleAddExercise(event, userId, currentR._id, day, exercise._id)
                                                             }
@@ -128,21 +140,19 @@ const DayList = ({ currentR, userId, setCurrentR }) => {
                                             </ul>
                                         </div>
                                     )}
+                                    <button className="button-54" onClick={handlePrevious} disabled={formValues.page === 1}>
+                                        Previous
+                                    </button>
+                                    <span className="page">{formValues.page}</span>
+                                    <button className="button-54" onClick={handleNext} disabled={formValues.page === maxPage}>
+                                        Next
+                                    </button>
                                 </div>
                             ) : (
-                                <button type="button" onClick={() => toggleSearchForm(day)}>
+                                <button className="button-54" type="button" onClick={() => toggleSearchForm(day)}>
                                     Show Search Form
                                 </button>
                             )}
-                        </div>
-                        <div className="day_column_left">
-                            <ul>
-                                {currentR[day].map((exerciseId, index) => (
-                                    <li key={index}>
-                                        <GetExercise userId={userId} routineId={currentR._id} date={day} exerciseId={exerciseId} />
-                                    </li>
-                                ))}
-                            </ul>
                         </div>
                     </React.Fragment>
                 ))}

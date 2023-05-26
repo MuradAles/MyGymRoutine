@@ -49,8 +49,6 @@ const GetExercise = ({ exerciseId, userId, routineId, date }) => {
                 <div className='oneExerciseName' onClick={toggleDetails}>
                     {exercise.name}
                 </div>
-                <div className="searchBox">
-                </div>
                 {showDetails && (
                     <div className='oneExerciseBox'>
                         <ul>
