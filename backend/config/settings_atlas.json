@@ -1,6 +1,6 @@
 {
   "mongoConfig": {
-    "serverUrl": "",
-    "database": "rm-db"
+    "serverUrl": "MongoDBAtlas",
+    "database": "MyGymRoutine"
   }
 }
