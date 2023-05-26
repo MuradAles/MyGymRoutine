@@ -1,6 +1,8 @@
+import { useState } from 'react';
 import { doSignInUserWithEmailAndPassword } from "../../firebase/FirebaseFunctions";
 import './Login.css'
 function Login() {
+    const [error, setError] = useState('');
     const handleSubmite = async (e) => {
         e.preventDefault();
         const { login_email_Intput, login_password_Intput } = e.target
@@ -20,8 +22,8 @@ function Login() {
                 })
             })
         } catch (error) {
-            console.log(error)
-            alert(error);
+            error.message = "Either Email or Password is incorrect"
+            setError(error.message);
         }
     }
     return (
@@ -54,6 +56,7 @@ function Login() {
                             />
                         </label>
                     </div>
+                    {error && <div className="error">{error}</div>}
                     <button className='button-54' type='submit'>
                         Login
                     </button>
