@@ -56,7 +56,7 @@ const GetExercise = ({ exerciseId, userId, routineId, date }) => {
                             <li>target: {exercise.target}</li>
                             <li>bodyPart: {exercise.bodyPart}</li>
                             <li>equipment: {exercise.equipment}</li>
-                            <button onClick={(event) => handleDeleteExercise(event, userId, routineId)}>Remove</button>
+                            <button className="button-54" onClick={(event) => handleDeleteExercise(event, userId, routineId)}>Remove</button>
                         </ul>
                     </div>
                 )}

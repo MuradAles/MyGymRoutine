@@ -1,7 +1,6 @@
 .Top_Bar {
     padding-left: 10px;
     padding-right: 10px;
-    padding-top: 10px;
     display: flex;
     align-items: center;
     background-color: rgb(35, 38, 41);
@@ -40,6 +39,9 @@ h6 {
 
 .Name_h1 {
     color: rgb(255, 255, 255);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 body::-webkit-scrollbar {

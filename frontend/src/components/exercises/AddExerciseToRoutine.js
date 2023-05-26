@@ -20,7 +20,6 @@ const addExercisetoRoutine = async (userId, routineId, date, exerciseId, setCurr
         }
     } catch (e) {
         console.log("addExerciseToRoutinercise", e)
-        alert(e);
     }
 }
 

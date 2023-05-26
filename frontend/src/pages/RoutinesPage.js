@@ -11,29 +11,31 @@ function RoutinesPage() {
     const [currentR, setCurrentR] = useState(null);
     // /getAllRoutines
     useEffect(() => {
-        const getAllRoutines = async () => {
-            try {
-                const response = await fetch('/routines/getAllRoutines', {
-                    method: 'POST',
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify({
-                        userId: currentUser.uid,
+        if (currentUser) {
+            const getAllRoutines = async () => {
+                try {
+                    const response = await fetch('/routines/getAllRoutines', {
+                        method: 'POST',
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({
+                            userId: currentUser.uid,
+                        })
                     })
-                })
-                if (response.ok) {
-                    const data = await response.json();
-                    setRList(data.routinesList);
-                } else {
-                    throw new Error('Request failed with status: ' + response.status);
+                    if (response.ok) {
+                        const data = await response.json();
+                        setRList(data.routinesList);
+                    } else {
+                        throw new Error('Request failed with status: ' + response.status);
+                    }
+                } catch (e) {
+                    console.log("getAllRoutines", e)
+                    alert(e);
                 }
-            } catch (e) {
-                console.log("getAllRoutines", e)
-                alert(e);
             }
+            getAllRoutines()
         }
-        getAllRoutines()
     }, [])
     // /createRoutine
     const createRoutine = async (e) => {
@@ -97,14 +99,14 @@ function RoutinesPage() {
             if (response.ok) {
                 const data = await response.json();
                 setRList(data.deleteRoutine)
-                if (currentR._id === RoutineId) {
+                if (currentR?._id === RoutineId) {
                     setCurrentR(null);
                 }
             } else {
                 throw new Error('Request failed with status: ' + response.status);
             }
         } catch (e) {
-            alert(e);
+            console.log(e)
         }
     }
 

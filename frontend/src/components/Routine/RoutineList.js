@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import './RoutineList.css'
 
 const RoutineList = ({ userId, list, getRoutine, deleteRoutine, createRoutine }) => {
-    const [isOpen, setIsOpen] = useState(false); // State to track dropdown visibility
+    const [isOpen, setIsOpen] = useState(false);
 
     const handleDelete = (e, routineId) => {
         e.stopPropagation();
@@ -15,7 +15,7 @@ const RoutineList = ({ userId, list, getRoutine, deleteRoutine, createRoutine })
 
     const handleItemClick = (routineId) => {
         getRoutine(routineId);
-        setIsOpen(false); // Close the dropdown after selecting an item
+        setIsOpen(false);
     };
 
     if (list) {

@@ -20,7 +20,6 @@ const deleteExerciseFromRoutine = async (userId, routineId, date, exerciseId) =>
         }
     } catch (e) {
         console.log("deleteExerciseFromRoutine", e)
-        alert(e);
     }
 }
 

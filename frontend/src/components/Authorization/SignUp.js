@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { doCreateUserWithEmailAndPassword } from "../../firebase/FirebaseFunctions";
-
+import './SignUp.css'
 function SignUp() {
     const [pwMatch, setPwMatch] = useState('')
     const handleSubmite = async (e) => {
@@ -31,7 +31,7 @@ function SignUp() {
         }
     }
     return (
-        <div className="App">
+        <div className="SignUp">
             <p>Sign Up </p>
             {pwMatch && <h4 className='error'>{pwMatch}</h4>}
             <form onSubmit={handleSubmite}>
@@ -40,7 +40,7 @@ function SignUp() {
                         <label htmlFor="signup_email_Intput">
                             Email:
                             <input
-                                className="input_tag"
+                                className="input_tag homePage"
                                 id="signup_email_Intput"
                                 placeholder="email"
                                 autoComplete="off"
@@ -52,7 +52,7 @@ function SignUp() {
                         <label htmlFor="signup_password_Intput">
                             Password:
                             <input
-                                className="input_tag"
+                                className="input_tag homePage"
                                 id="signup_password_Intput"
                                 placeholder="password"
                                 type="password"
@@ -65,7 +65,7 @@ function SignUp() {
                         <label htmlFor="signup_repeat_password_Intput">
                             Repeat Password:
                             <input
-                                className="input_tag"
+                                className="input_tag homePage"
                                 id="signup_repeat_password_Intput"
                                 placeholder="password"
                                 type="password"
@@ -74,7 +74,7 @@ function SignUp() {
                             />
                         </label>
                     </div>
-                    <button id='submiteButton' type='submit'>
+                    <button className='button-54' type='submit'>
                         Sign up
                     </button>
                 </div>

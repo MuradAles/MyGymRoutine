@@ -7,7 +7,6 @@ function Homepage() {
     const { currentUser } = useContext(AuthContext)
     return (
         <div className="App">
-            <p>HomePage</p>
             {currentUser ? (
                 <>
                     <Navigate to='/routine' />

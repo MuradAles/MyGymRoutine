@@ -1,6 +1,5 @@
-import { useState } from "react";
 import { doSignInUserWithEmailAndPassword } from "../../firebase/FirebaseFunctions";
-
+import './Login.css'
 function Login() {
     const handleSubmite = async (e) => {
         e.preventDefault();
@@ -21,11 +20,12 @@ function Login() {
                 })
             })
         } catch (error) {
+            console.log(error)
             alert(error);
         }
     }
     return (
-        <div className="App">
+        <div className="Login">
             <p>Login </p>
             <form onSubmit={handleSubmite}>
                 <div className="login_Div">
@@ -33,7 +33,7 @@ function Login() {
                         <label htmlFor="login_email_Intput">
                             Email:
                             <input
-                                className="input_tag"
+                                className="input_tag homePage"
                                 id="login_email_Intput"
                                 placeholder="email"
                                 autoComplete="off"
@@ -45,7 +45,7 @@ function Login() {
                         <label htmlFor="login_password_Intput">
                             Password:
                             <input
-                                className="input_tag"
+                                className="input_tag homePage"
                                 id="login_password_Intput"
                                 placeholder="password"
                                 type="password"
@@ -54,7 +54,7 @@ function Login() {
                             />
                         </label>
                     </div>
-                    <button id='login_submiteButton' type='submit'>
+                    <button className='button-54' type='submit'>
                         Login
                     </button>
                 </div>
