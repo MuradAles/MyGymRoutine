@@ -19,6 +19,10 @@
 .env.test.local
 .env.production.local
 
+.firebase
+.firebaserc
+firebase.json
+
 package-lock.json
 
 npm-debug.log*
