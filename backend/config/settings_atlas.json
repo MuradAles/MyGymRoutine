@@ -1,6 +1,0 @@
-{
-  "mongoConfig": {
-    "serverUrl": "",
-    "database": "MyGymRoutine"
-  }
-}

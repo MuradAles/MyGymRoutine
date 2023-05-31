@@ -35,20 +35,20 @@ const main = async () => {
     const db = await dbConnection.dbConnection();
     await db.dropDatabase();
     console.log("connected");
-    try {
-        const data = await parseCSV();
-        for (const row of data) {
-            await exercisesData.createExercise({
-                name: row.name,
-                target: row.target,
-                bodyPart: row.bodyPart,
-                equipment: row.equipment,
-                gifUrl: row.gifUrl,
-            });
-        }
-    } catch (error) {
-        console.log(error.message);
-    }
+    // try {
+    //     const data = await parseCSV();
+    //     for (const row of data) {
+    //         await exercisesData.createExercise({
+    //             name: row.name,
+    //             target: row.target,
+    //             bodyPart: row.bodyPart,
+    //             equipment: row.equipment,
+    //             gifUrl: row.gifUrl,
+    //         });
+    //     }
+    // } catch (error) {
+    //     console.log(error.message);
+    // }
     await dbConnection.closeConnection();
     console.log('Done!');
 };

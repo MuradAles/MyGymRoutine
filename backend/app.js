@@ -17,8 +17,8 @@ app.use(
 
 configRoutes(app);
 
-const port = process.env.PORT || 4000;
+const port = process.env.PORT || 8080;
 app.listen(port, () => {
     console.log("We've now got a server!");
-    console.log('Your routes will be running on http://localhost:4000');
+    console.log(`Your routes will be running on http://localhost:${port}`);
 });

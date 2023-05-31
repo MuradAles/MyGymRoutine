@@ -1,7 +1,12 @@
 const MongoClient = require('mongodb').MongoClient;
-// use local bottom 2 line
-const settings = require('./settings_local.json');
-const mongoConfig = settings.mongoConfig;
+const dotenv = require('dotenv');
+dotenv.config();
+
+const serverUrl = process.env.SERVER_URL || 'mongodb://localhost:27017/';
+const mongoConfig = {
+  serverUrl: serverUrl,
+  database: 'MyGymRoutine',
+};
 
 let _connection = undefined;
 let _db = undefined;
