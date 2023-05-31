@@ -1,7 +1,6 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "proxy": "http://localhost:8080",
   "description": "Backend for MyGymRoutine",
   "main": "app.js",
   "scripts": {
