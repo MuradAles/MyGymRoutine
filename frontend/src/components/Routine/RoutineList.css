@@ -91,22 +91,9 @@
     transform: translate(2px, 2px);
 }
 
-.Name_h1 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 30px;
-    padding-right: 45px;
-}
-
-
-@media (min-width: 0px) {
+@media (max-width: 768px) {
     .button-50 {
-        padding: em 0.50em;
-    }
-
-    .Name_h1 {
-        text-transform: capitalize;
+        padding: 0.5em 0.6em;
     }
 
     .dropdown_menu {

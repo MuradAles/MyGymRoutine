@@ -34,7 +34,7 @@ const DayList = ({ currentR, userId, setCurrentR }) => {
                     throw new Error('Request failed with status: ' + response.status);
                 }
             } catch (e) {
-                console.log('getExercise', e);
+                console.log(e);
             }
         };
 

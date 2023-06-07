@@ -8,14 +8,13 @@ const addExercisetoRoutine = async (userId, routineId, date, exerciseId, setCurr
                 date: date,
                 exerciseId: exerciseId
             });
-        if (response.ok) {
-            const data = await response.json();
-            setCurrentR(data)
+        if (response.status === 200) {
+            const data = response.data;
         } else {
             throw new Error('Request failed with status: ' + response.status);
         }
     } catch (e) {
-        console.log("addExerciseToRoutinercise", e)
+        console.log(e)
     }
 }
 

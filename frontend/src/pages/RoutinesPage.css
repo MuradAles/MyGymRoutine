@@ -2,6 +2,7 @@
     padding-left: 10px;
     padding-right: 10px;
     display: flex;
+    justify-content: space-between;
     align-items: center;
     background-color: rgb(35, 38, 41);
 }
@@ -18,7 +19,26 @@
 
 .Logout {
     order: 3;
-    margin-right: auto;
+    margin-left: 10px;
+}
+
+@media (max-width: 768px) {
+    .Top_Bar {
+        align-items: flex-start;
+    }
+
+    .RoutineList {
+        flex-basis: 50%;
+    }
+
+    .Logout {
+        flex-basis: 50%;
+        text-align: right;
+    }
+
+    .CurrentName {
+        display: none;
+    }
 }
 
 ul {

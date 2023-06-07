@@ -14,7 +14,6 @@ const deleteExerciseFromRoutine = async (userId, routineId, date, exerciseId) =>
 
         if (response.status === 200) {
             const data = response.data;
-            console.log(data);
         } else {
             throw new Error('Request failed with status: ' + response.status);
         }
