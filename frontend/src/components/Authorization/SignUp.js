@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { doCreateUserWithEmailAndPassword } from "../../firebase/FirebaseFunctions";
+import { apiInstance } from "../../utils/apiInstance";
 import './SignUp.css'
 function SignUp() {
     const [errorSet, setError] = useState('');
@@ -37,17 +38,16 @@ function SignUp() {
                 signup_email_Input.value,
                 signup_password_Input.value,
             )
-            await fetch('/users/signup', {
-                method: 'POST',
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
+            await apiInstance
+                .post("/users/signup", {
                     uid: userId,
                     email: signup_email_Input.value,
                     password: signup_password_Input.value
-                })
-            })
+                }, {
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
         } catch (er) {
             setError("Email is incorrect or been in Used");
         }

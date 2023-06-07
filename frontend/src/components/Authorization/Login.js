@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { doSignInUserWithEmailAndPassword } from "../../firebase/FirebaseFunctions";
+import { apiInstance } from "../../utils/apiInstance";
 import './Login.css'
 function Login() {
     const [error, setError] = useState('');
@@ -11,16 +12,11 @@ function Login() {
                 login_email_Intput.value,
                 login_password_Intput.value,
             )
-            await fetch('/users/login', {
-                method: 'POST',
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
+            await apiInstance
+                .post("/users/login", {
                     email: login_email_Intput.value,
                     password: login_password_Intput.value
-                })
-            })
+                });
         } catch (error) {
             error.message = "Either Email or Password is incorrect"
             setError(error.message);

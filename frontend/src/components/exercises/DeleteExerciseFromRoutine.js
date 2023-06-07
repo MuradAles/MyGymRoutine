@@ -1,25 +1,25 @@
+import { apiInstance } from "../../utils/apiInstance";
 const deleteExerciseFromRoutine = async (userId, routineId, date, exerciseId) => {
     try {
-        const response = await fetch('/routines/deleteExerciseFromRoutine', {
-            method: 'POST',
+        const response = await apiInstance.post('/routines/deleteExerciseFromRoutine', {
+            user: userId,
+            routineId: routineId,
+            date: date,
+            exerciseId: exerciseId,
+        }, {
             headers: {
-                "Content-Type": "application/json"
+                'Content-Type': 'application/json',
             },
-            body: JSON.stringify({
-                user: userId,
-                routineId: routineId,
-                date: date,
-                exerciseId: exerciseId
-            })
         });
-        if (response.ok) {
-            const data = await response.json();
-            console.log(data)
+
+        if (response.status === 200) {
+            const data = response.data;
+            console.log(data);
         } else {
             throw new Error('Request failed with status: ' + response.status);
         }
     } catch (e) {
-        console.log("deleteExerciseFromRoutine", e)
+        console.log(e);
     }
 }
 

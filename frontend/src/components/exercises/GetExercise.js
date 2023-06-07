@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import deleteExerciseFromRoutine from './DeleteExerciseFromRoutine'
+import { apiInstance } from "../../utils/apiInstance";
 import "./GetExercises.css"
 
 const GetExercise = ({ exerciseId, userId, routineId, date }) => {
@@ -10,24 +11,20 @@ const GetExercise = ({ exerciseId, userId, routineId, date }) => {
     useEffect(() => {
         const fetchExercise = async () => {
             try {
-                const response = await fetch('/exercises/getExercise', {
-                    method: 'POST',
+                const response = await apiInstance.post('/exercises/getExercise', { exerciseId }, {
                     headers: {
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify({
-                        exerciseId: exerciseId
-                    })
                 });
 
-                if (response.ok) {
-                    const data = await response.json();
+                if (response.status === 200) {
+                    const data = response.data;
                     setExercise(data);
                 } else {
                     throw new Error('Request failed with status: ' + response.status);
                 }
             } catch (e) {
-                console.log("getExercise", e)
+                console.log('getExercise', e);
             }
         };
 

@@ -11,7 +11,7 @@ const parseCSV = () => {
     return new Promise((resolve, reject) => {
         const data = [];
 
-        fs.createReadStream("./tasks/fitness_exercises.csv")
+        fs.createReadStream("./tasks/exercises.csv")
             .pipe(
                 parse({
                     delimiter: ",",

@@ -21,7 +21,7 @@ const validateEmail = (email) => {
     if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
         return email
     }
-    return "Email is wrong"
+    throw "Email is wrong"
 }
 
 const checkPageValidation = (page) => {

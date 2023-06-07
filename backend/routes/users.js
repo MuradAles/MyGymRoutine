@@ -46,21 +46,20 @@ router
         try {
             emailData = validation.validateEmail(emailData);
         } catch (e) {
-            res.status(400).json({ error: e });
+            res.status(400).json({ error1: e });
             return;
         }
         try {
             passwordData = validation.validatePassword(passwordData);
         } catch (e) {
-            res.status(400).json({ error: e });
+            res.status(400).json({ error2: e });
             return;
         }
-        let loginIn;
         try {
-            loginIn = await usersData.createUser(uidData, emailData, passwordData);
+            let loginIn = await usersData.createUser(uidData, emailData, passwordData);
             res.status(200).json({ id: loginIn.id.toString(), email: loginIn.email });
         } catch (e) {
-            res.status(400).json({ error: e });
+            res.status(400).json({ error3: e });
             return;
         }
     })

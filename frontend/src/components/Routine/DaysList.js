@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import GetExercise from '../exercises/GetExercise';
 import AddExerciseToRoutine from '../exercises/AddExerciseToRoutine';
+import { apiInstance } from "../../utils/apiInstance";
 import './DaysList.css';
 
 const DayList = ({ currentR, userId, setCurrentR }) => {
@@ -18,15 +19,14 @@ const DayList = ({ currentR, userId, setCurrentR }) => {
     useEffect(() => {
         const searchExercise = async () => {
             try {
-                const response = await fetch('/exercises/searchExercise', {
-                    method: 'POST',
+                const response = await apiInstance.post('/exercises/searchExercise', formValues, {
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify(formValues),
                 });
-                if (response.ok) {
-                    const data = await response.json();
+
+                if (response.status === 200) {
+                    const data = response.data;
                     setMaxPage(Math.ceil(data.count / 10));
                     setExerciseList(data.exercisesOfConversation);
                     scrollSearchBoxResultToTop();

@@ -4,6 +4,7 @@ import DayList from "../components/Routine/DaysList"
 import { useContext, useEffect, useState } from "react"
 import { AuthContext } from "../firebase/Auth"
 import { Navigate } from 'react-router-dom';
+import { apiInstance } from "../utils/apiInstance";
 import "./RoutinesPage.css"
 function RoutinesPage() {
     const { currentUser } = useContext(AuthContext)
@@ -14,23 +15,17 @@ function RoutinesPage() {
         if (currentUser) {
             const getAllRoutines = async () => {
                 try {
-                    const response = await fetch('/routines/getAllRoutines', {
-                        method: 'POST',
-                        headers: {
-                            "Content-Type": "application/json"
-                        },
-                        body: JSON.stringify({
-                            userId: currentUser.uid,
-                        })
-                    })
-                    if (response.ok) {
-                        const data = await response.json();
+                    const response = await apiInstance.post('/routines/getAllRoutines', {
+                        userId: currentUser.uid,
+                    });
+                    if (response.status === 200) {
+                        const data = response.data;
                         setRList(data.routinesList);
                     } else {
                         throw new Error('Request failed with status: ' + response.status);
                     }
                 } catch (e) {
-                    console.log("getAllRoutines", e)
+                    console.log('getAllRoutines', e);
                     alert(e);
                 }
             }
@@ -42,19 +37,18 @@ function RoutinesPage() {
         e.preventDefault();
         const { Rname_Intput } = e.target
         try {
-            const response = await fetch('/routines/create', {
-                method: 'POST',
+            const response = await apiInstance.post('/routines/create', {
+                userId: currentUser.uid,
+                routineName: Rname_Intput.value,
+            }, {
                 headers: {
-                    "Content-Type": "application/json"
+                    'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({
-                    userId: currentUser.uid,
-                    routineName: Rname_Intput.value,
-                })
-            })
-            if (response.ok) {
-                const data = await response.json();
-                setRList([...RList, data.createdRoutine])
+            });
+
+            if (response.status === 200) {
+                const data = response.data;
+                setRList([...RList, data.createdRoutine]);
             } else {
                 throw new Error('Request failed with status: ' + response.status);
             }
@@ -64,19 +58,18 @@ function RoutinesPage() {
     }
     const getRoutine = async (RoutineId) => {
         try {
-            const response = await fetch('/routines/getRoutine', {
-                method: 'POST',
+            const response = await apiInstance.post('/routines/getRoutine', {
+                userId: currentUser.uid,
+                routineId: RoutineId,
+            }, {
                 headers: {
-                    "Content-Type": "application/json"
+                    'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({
-                    userId: currentUser.uid,
-                    routineId: RoutineId
-                })
-            })
-            if (response.ok) {
-                const data = await response.json();
-                setCurrentR(data.currentRoutine)
+            });
+
+            if (response.status === 200) {
+                const data = response.data;
+                setCurrentR(data.currentRoutine);
             } else {
                 throw new Error('Request failed with status: ' + response.status);
             }
@@ -86,19 +79,18 @@ function RoutinesPage() {
     }
     const deleteRoutine = async (userId, RoutineId) => {
         try {
-            const response = await fetch('/routines/deleteRoutine', {
-                method: 'POST',
+            const response = await apiInstance.post('/routines/deleteRoutine', {
+                user: userId,
+                routineId: RoutineId,
+            }, {
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({
-                    user: userId,
-                    routineId: RoutineId
-                })
             });
-            if (response.ok) {
-                const data = await response.json();
-                setRList(data.deleteRoutine)
+
+            if (response.status === 200) {
+                const data = response.data;
+                setRList(data.deleteRoutine);
                 if (currentR?._id === RoutineId) {
                     setCurrentR(null);
                 }
@@ -106,7 +98,7 @@ function RoutinesPage() {
                 throw new Error('Request failed with status: ' + response.status);
             }
         } catch (e) {
-            console.log(e)
+            console.log(e);
         }
     }
 
