@@ -9,13 +9,13 @@ const RoutineList = ({ userId, list, getRoutine, deleteRoutine, createRoutine })
         deleteRoutine(userId, routineId);
     };
 
-    const handleToggle = () => {
-        setIsOpen(!isOpen);
-    };
-
     const handleItemClick = (routineId) => {
         getRoutine(routineId);
         setIsOpen(false);
+    };
+
+    const handleToggle = () => {
+        setIsOpen(!isOpen);
     };
 
     if (list) {

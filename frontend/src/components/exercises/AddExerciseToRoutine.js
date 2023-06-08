@@ -1,5 +1,5 @@
 import { apiInstance } from "../../utils/apiInstance";
-const addExercisetoRoutine = async (userId, routineId, date, exerciseId, setCurrentR) => {
+const addExercisetoRoutine = async (userId, routineId, date, exerciseId) => {
     try {
         const response = await apiInstance
             .post("/routines/addExerciseToRoutine", {

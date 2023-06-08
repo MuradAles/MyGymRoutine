@@ -1,32 +1,13 @@
-import { useState } from "react";
-import Login from "../components/Authorization/Login";
-import SignUp from "../components/Authorization/SignUp";
-import { useContext } from "react";
-import { AuthContext } from "../firebase/Auth";
-import { Navigate } from 'react-router-dom';
-
-function Homepage() {
-    const { currentUser } = useContext(AuthContext);
-    const [showLogin, setShowLogin] = useState(true);
-
-    const handleToggle = () => {
-        setShowLogin(!showLogin);
-    };
-
+function HomePage() {
     return (
-        <div className="HomePage" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100vh' }}>
-            {currentUser ? (
-                <Navigate to="/routine" />
-            ) : (
-                <>
-                    <button className="button-54" onClick={handleToggle}>
-                        {showLogin ? "Sign Up" : "Login"}
-                    </button>
-                    {showLogin ? <Login /> : <SignUp />}
-                </>
-            )}
+        <div className="HomePage">
+            <div className="AboutWeb">
+                <p>About</p>
+            </div>
+            <div className="FutureFeatures">
+                <p>Feature list that will be added soon</p>
+            </div>
         </div>
-    );
-}
-
-export default Homepage;
+    )
+};
+export default HomePage;

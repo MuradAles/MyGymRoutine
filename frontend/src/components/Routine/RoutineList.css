@@ -144,9 +144,3 @@
     top: 5px;
     left: 5px;
 }
-
-@media (min-width: 768px) {
-    .button-54 {
-        padding: 0.25em 0.75em;
-    }
-}
