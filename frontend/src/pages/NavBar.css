@@ -1,0 +1,51 @@
+.navBar {
+    display: flex;
+    justify-content: space-between;
+    background-color: rgb(35, 38, 41);
+    padding-top: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 5px;
+}
+
+.logo {
+    font-size: 40px;
+    color: white;
+    font-family: "Comic Sans MS", Comic Sans, cursive;
+}
+
+.logo:hover {
+    color: rgb(181, 181, 181);
+}
+
+.button-50 {
+    margin-right: 10px;
+}
+
+.leftLinks {
+    display: flex;
+    align-items: center;
+}
+
+.rightLinks {
+    display: flex;
+    align-items: center;
+}
+
+.no-underline {
+    text-decoration: none;
+}
+
+@media (max-width: 768px) {
+    .navBar {
+        padding-top: 2px;
+        padding-left: 2px;
+        padding-right: 2px;
+    }
+
+    .logo {
+        font-size: 25px;
+        color: white;
+        font-family: "Comic Sans MS", Comic Sans, cursive;
+    }
+}

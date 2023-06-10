@@ -43,7 +43,7 @@ const main = async () => {
                 target: row.target,
                 bodyPart: row.bodyPart,
                 equipment: row.equipment,
-                gifUrl: row.gifUrl,
+                gifUrl: `https://raw.githubusercontent.com/MuradAles/MyGymRoutine/main/backend/tasks/gifImages/${row.id}.gif`,
             });
         }
     } catch (error) {

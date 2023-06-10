@@ -46,11 +46,11 @@ const RoutineList = ({ userId, list, getRoutine, deleteRoutine, createRoutine })
                                                 id="Rname_Intput"
                                                 placeholder="Routine Name"
                                                 autoComplete="off"
-                                                maxLength="15"
+                                                maxLength="12"
                                                 required
                                             />
                                         </label>
-                                        <button className="button-54" type="submit">Create Routine</button>
+                                        <button className="button-54" type="submit">Create Plan</button>
                                     </form>
                                 </div>
                             </li>

@@ -124,12 +124,19 @@ function RoutinesPage() {
                                     </>
                                 )}
                             </div>
-                            <div className="Logout">
-                                <Logout />
-                            </div>
                         </div>
                         <div className="Bottom_Bar">
-                            <DayList currentR={currentR} userId={currentUser.uid} setCurrentR={setCurrentR} />
+                            {currentR ? (
+                                <DayList currentR={currentR} userId={currentUser.uid} setCurrentR={setCurrentR} />
+                            ) : (
+                                <div className="instruction">
+                                    <h1>Instruction</h1>
+                                    <p>For the beginnig Press on 'Select Routine'.
+                                        On the bottom of left corner of drop menu,
+                                        put name for your routine.
+                                        After creatign Routine you need to select it in in drop menu.</p>
+                                </div>
+                            )}
                         </div>
                     </div>
                 </>
