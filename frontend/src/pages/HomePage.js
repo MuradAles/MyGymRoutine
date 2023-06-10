@@ -10,8 +10,7 @@ function HomePage() {
                 <h1>Feature that coming soon</h1>
                 <ul>
                     <li>1. Enhance Search functionality to enable targeted exercise selection based on specific muscle groups.</li>
-                    <li>2. Make a 30 days exercise week</li>
-                    <li>3. Include additional details for exercises, such as the number of repetitions and the duration or timing.</li>
+                    <li>2. Include additional details for exercises, such as the number of repetitions and the duration or timing.</li>
                 </ul>
             </div>
         </div>
